@@ -38,6 +38,18 @@
       "assistant_tag": "assistant"
     }
   },
+  "wrod_openai": {
+  "file_name": "wrod_finetune_dataset.json",
+  "formatting": "sharegpt",
+  "columns": { "messages": "messages" },
+  "tags": {
+    "role_tag": "role",
+    "content_tag": "content",
+    "user_tag": "user",
+    "assistant_tag": "assistant",
+    "system_tag": "system"
+    }
+  },
   "mllm_audio_demo": {
     "file_name": "mllm_audio_demo.json",
     "formatting": "sharegpt",

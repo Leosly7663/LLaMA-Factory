@@ -1,0 +1,36 @@
+# --- model ---
+model_name_or_path: meta-llama/Meta-Llama-3.1-8B-Instruct
+template: llama3
+
+# --- task ---
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all           # or specify q_proj,v_proj,k_proj,o_proj,gate_proj,up_proj,down_proj
+lora_rank: 16              # common LoRA knobs
+lora_alpha: 16
+lora_dropout: 0.05
+
+# --- data ---
+dataset: wrod_openai
+cutoff_len: 2048
+val_size: 0.1
+overwrite_cache: true
+
+# --- training ---
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 2e-4
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true                 # set true if your GPU supports bf16; else use fp16
+
+# --- logging / output ---
+output_dir: saves/wrod-llama3.1-8b/lora
+logging_steps: 10
+save_steps: 200
+plot_loss: true
+
+# --- QLoRA (optional, saves VRAM) ---
+quantization_bit: 4        # enables 4-bit QLoRA with bitsandbytes/HQQ/EETQ
